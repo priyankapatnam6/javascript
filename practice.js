@@ -233,6 +233,21 @@ console.log(data.map(item=>{
  console.log("---------------------------------------------------DOM(DOC Obj Model)---------------------------------------------");
 //  DOM->DOCUMENT OBJECT MODEL-->Tree like struture
 
+
+
+
+
+console.log("------------------------------------------------------------------------------------------------");
+function sum(a,b,next) {
+    sum = a+b;
+    console.log(next(sum));
+    return next(sum);
+};
+const square=(n)=>n**2;
+console.log(sum(2,3,square));
+// here sum is higher order function and sqaure is callback
+
+
  
  
  
