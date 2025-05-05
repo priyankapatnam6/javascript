@@ -187,7 +187,7 @@ console.log("done with your dish");
 setTimeout(()=>{
     clearInterval(interval);
     console.log("Dish is ready to serve");
-},8000);
+},800);
 
 
 
@@ -230,6 +230,145 @@ console.log(data.map(item=>{
 }
  api();
  console.log("---------------------------------------------------async/await---------------------------------------------");
+// syntactically finishing the code in one line. and it introduced in 2015.
+// used to handle asynchronous operations more clearly.
+// async:-returns a promise
+// await:-pause the execution until the promise is finished.
+ async function ApiUrl(){
+    try{
+      const response =  await fetch(`https://fakestoreapi.com/products/1`);
+        const data =await  response.json();
+       console.log("asyncawit-------------> ", data);
+        return data;
+    }catch(error){
+        console.log(error);
+    } 
+}
+
+ApiUrl();
+console.log("---------------------------------------------------CURRYING---------------------------------------------");
+// a technique where a fuction take multiple arguments is transaformed into a sequence of single argument.
+// it wont duplicate the function.
+//  a function can be reused.
+// Advantage:- ability to create a higher order function.
+
+
+function addd(a){
+   return function(b){
+        return a + b
+    }
+}
+console.log("currying",addd(3)(5));
+let curadd = addd(3);
+console.log("currying1",curadd(5));
+
+
+
+
+function multiply(a = 1) {
+    return function(b = 1) {
+      return a * b;
+    };
+  }
+  console.log("cr",multiply(2)(3)); 
+  console.log("cr",multiply(2)());   
+  console.log("cr",multiply()());   
+  
+  
+  function authenticate(user) {
+    return function(password) {
+      return user === "admin" && password === "admin123";
+    };
+  }
+  
+  const checkAdminAuth = authenticate("admin");
+  console.log("cr auth",checkAdminAuth("admin123")); 
+  console.log("cr auth",checkAdminAuth("wrongPassword")); 
+
+  console.log("---------------------------------------------------CLOSURES---------------------------------------------");
+// gives access to outer function from an inner function. same as inheritance.
+function outer() {
+    let counter = 1;
+    return function inner() {
+      counter++;
+      console.log(counter);
+    };
+  }
+  const increment = outer();
+  increment();  
+  increment();  
+  increment();  
+
+
+
+ console.log("---------------------------------------------------LEXICAL SCOPE---------------------------------------------");
+//   Inner functions can access variables from their outer functions because of lexical scoping.
+function outerr() {
+    let outerVar = 'I am outside!';
+    function inner() {
+      console.log(outerVar);  
+    }
+    inner();
+  }
+  outerr();
+
+  
+  console.log("---------------------------------------------------CALL() BIND() BIND()------------------------");
+//Use call() and apply() when you need to invoke the function immediately with a specific context.
+//use bind() when you want to create a new function that can be called later with a predefined context.
+function greett(name){
+    console.log(`Hello, ${name}!`);
+  }
+  greett.call(null,'Alice');
+  const person = { name: 'Bob' };
+greett.call(person,person.name);
+// greett.bind(person,person.name);
+const greetAlice = greett.bind(null, 'Priyanka');
+greetAlice();
+// console.log("fg",greett.call(person, person.name));
+// console.log("bind",greett.bind(person,person.name));
+
+
+function gret(name, age) {
+    console.log(`Hello, my name is ${name} and I am ${age} years old.`);
+  }
+  // Using apply to call greet function
+  gret.apply(null, ['Alice', 25]);
+  // Output: Hello, my name is Alice and I am 25 years old.
+
+  const personn= {
+    firstName: 'John',
+    lastName: 'Doe',
+    fullName: function(city, country) {
+      return `${this.firstName} ${this.lastName} from ${city}, ${country}`;
+    }
+  };
+  
+  // Using apply with `this` context
+  const result = personn.fullName.apply(person, ['New York', 'USA']);
+  console.log(result);
+  // Output: John Doe from New York, USA
+  
+  
+
+  
+
+
+
+  
+  
+
+  
+
+
+
+
+
+
+
+
+
+
  console.log("---------------------------------------------------DOM(DOC Obj Model)---------------------------------------------");
 //  DOM->DOCUMENT OBJECT MODEL-->Tree like struture
 
@@ -244,7 +383,8 @@ function sum(a,b,next) {
     return next(sum);
 };
 const square=(n)=>n**2;
-console.log(sum(2,3,square));
+console.log("exponential==>",2**5);
+console.log("callback->",sum(2,3,square));
 // here sum is higher order function and sqaure is callback
 
 

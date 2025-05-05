@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div,p,form{
+            border: 1px solid black;
+            margin:40px;
+        }
+    </style>
+</head>
+<body>
+    <div style="border: 1px solid black">  EVENT
+        <pre> <b>Event:</b> an occurence of an action taht happens in the user interface as a result of user interaction</pre>     
+        <button onclick="handleButtonClick()">EVENT BUTTON
+    </button> </div>&nbsp;
+
+    <!-- EVENT BUBBLING -->
+    <div style="border: 1px solid black">  EVENT BUBBLING
+         <li>  occurs only from child to parent </li>
+         <li> when a button is clicked ,an event bubbles upto the parent element</li>
+
+
+         <form onclick="alert(' its me form')" >Form
+             <div onclick="alert(' its me div')">Div
+      <p> <button  onclick="alert(' its me button')" type="button">Click MeButton</button> </p> </div> </form>
+
+    <div  style="border: 1px solid black">EVENT CAPTURING
+         <li>its is opposite to event bubbling </li>
+        <li> where an event is handled from ancestor/higher level (the root of the DOM tree) amd moving down to the target element </li>
+        <div id="parent" style="padding: 2px;border: 2px solid black;">
+            Parent Div <div>
+                <button id="child" type="button" style="margin-left: 20px;">Click Me Button</button> </div> </div> </div>
+    </div>
+
+
+    <form onclick="debouncedEvent('It\'s me, form!')">Form
+        <div onclick="debouncedEvent('It\'s me, div!')">Div
+            <p>
+                <button type="button" onclick="debouncedEvent('It\'s me, button!')">Click MeButton</button>
+            </p>
+        </div>
+    </form>
+
+    <li>Event delegation is a technique where a single event listener is added to a parent element instead of adding individual event listeners to each child element. This takes advantage of event bubbling, where the event propagates from the target element up to its ancestors.
+        </li>
+    <form onclick="eventDelegation(event)">Form
+        <div>Div
+            <p>
+                <button type="button">Click MeButton</button>
+            </p>
+        </div>
+    </form>
+
+
+    <button onclick="throttledEvent()">Click MeButton (Throttle Test)</button>
+
+
+
+
+    <script>
+        // Function to handle the button click event
+        function handleButtonClick() {
+            alert('Button was clicked!'); }
+
+
+        // Event Capturing Example
+        document.getElementById('parent').addEventListener('click', function() {
+            alert('Parent Div Clicked (Capturing)');
+        }, true);  // true means capturing phase
+
+        document.getElementById('child').addEventListener('click', function() {
+            alert('Button Clicked (Capturing)');
+        }, true);  // true means capturing phase
+
+ // Debounce function
+ let debounceTimer;
+        function debouncedEvent(message) {
+            // Clear the previous timer if event is fired again before timeout
+            clearTimeout(debounceTimer);
+            
+            // Set a new timeout
+            debounceTimer = setTimeout(function() {
+                alert(message);
+            }, 500); // Wait for 500ms after the last click to trigger the alert
+        }
+
+          // Event Delegation Function
+          function eventDelegation(event) {
+            // This checks which element was clicked
+            if (event.target.tagName === 'BUTTON') {
+                alert("Button clicked");
+            } else if (event.target.tagName === 'DIV') {
+                alert("Div clicked");
+            } else if (event.target.tagName === 'FORM') {
+                alert("Form clicked");
+            }
+        }
+
+          // Throttle function
+          let lastExecutionTime = 0;
+        function throttledEvent() {
+            const now = Date.now();
+            const throttleTime = 1000; // Only trigger the event once every 1000ms (1 second)
+            
+            // Check if the last execution time is greater than the throttle time
+            if (now - lastExecutionTime >= throttleTime) {
+                alert("Throttled event triggered");
+                lastExecutionTime = now;  // Update last execution time
+            }
+        }
+    </script>
+    
+</body>
+</html>
