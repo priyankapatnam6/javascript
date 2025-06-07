@@ -3,6 +3,9 @@ console.log("I'm Priyanka");
 
 
 
+
+
+
 const stringReverse =(str)=>{
     return  str.split('').reverse().join('');}
 console.log("stringReverse",stringReverse('priyanka patnam'));
@@ -61,7 +64,7 @@ console.log("---------------------------------------------------sample examples-
 console.log("1"+1);
 console.log(1+1);
 console.log(true+1);
-console.log('true'+1);
+console.log("truth",'true'+1);
 console.log(false+6);
 console.log('false'+6);
 console.log("------------------------------------------------------------------------------------------------"); 
@@ -76,7 +79,7 @@ console.log("sort",sort);
 console.log(Math.max(...sort));
 console.log(Math.min(...sort));
 const string = 'priyanka';
-console.log(string.split('a').length-1);
+console.log("wtt",string.split('a').length-1);
 console.log(true || false);
 console.log(true && false);
 
@@ -247,7 +250,7 @@ console.log(data.map(item=>{
 
 ApiUrl();
 console.log("---------------------------------------------------CURRYING---------------------------------------------");
-// a technique where a fuction take multiple arguments is transaformed into a sequence of single argument.
+// a technique where a fuction take multiple arguments is transformed into a sequence of single argument.
 // it wont duplicate the function.
 //  a function can be reused.
 // Advantage:- ability to create a higher order function.
@@ -273,6 +276,7 @@ function multiply(a = 1) {
   console.log("cr",multiply(2)(3)); 
   console.log("cr",multiply(2)());   
   console.log("cr",multiply()());   
+   console.log("cr",multiply('')('')); 
   
   
   function authenticate(user) {
@@ -282,6 +286,7 @@ function multiply(a = 1) {
   }
   
   const checkAdminAuth = authenticate("admin");
+  console.log("checkAdminAuth",checkAdminAuth(''));
   console.log("cr auth",checkAdminAuth("admin123")); 
   console.log("cr auth",checkAdminAuth("wrongPassword")); 
 
@@ -313,7 +318,7 @@ function outerr() {
   outerr();
 
   
-  console.log("---------------------------------------------------CALL() BIND() BIND()------------------------");
+  console.log("---------------------------------------------------CALL() BIND() APPLY()------------------------");
 //Use call() and apply() when you need to invoke the function immediately with a specific context.
 //use bind() when you want to create a new function that can be called later with a predefined context.
 function greett(name){
@@ -348,6 +353,42 @@ function gret(name, age) {
   const result = personn.fullName.apply(person, ['New York', 'USA']);
   console.log(result);
   // Output: John Doe from New York, USA
+
+
+  console.log("------------------------------------------------------REST & SPREAD OPERATORS--------------------------------------");
+const absc="javascript";
+const newabsc=[...absc];
+console.log("spread",newabsc);
+const [first , ...r]=newabsc;
+ 
+console.log(first);
+console.log(r);
+console.log("-----------------------------------------------------DEEP COPY & SHALLOW COPY--------------------------------------");
+console.table([{heading:"DEEP COPY",definition:"Makes a complete copy of the original object and everything inside it, so changes don’t affect the original."},
+    {heading:"SHALLOW COPY",definition:"Makes a new copy of the object, but keeps links to things inside it, so some changes can affect the original."}]);
+ 
+ 
+    const element = [{
+        name:'Alice',age:20,place:'hyderabad'},
+    {name:'patnam',age:21,place:'mehidipatnam'}];
+    console.log("shallow copy",element);
+ 
+    const shallowcopy = [...element];
+    console.log("--------- shallow copy After modification----------");
+    shallowcopy[1].name='PRIYA';
+    console.log("after copied=>",shallowcopy);
+    console.log("original=>",element);
+ 
+ 
+    console.log("----------------------DEEP COPY-----------------------------");
+    let deepCopy = JSON.parse(JSON.stringify(element));
+    console.log(deepCopy);
+    console.log(element);
+        console.log("---------------------- AFTER DEEP COPY-----------------------------");
+        deepCopy[0].name="Patnam Priyanka";
+         console.log(deepCopy);
+    console.log(element);
+ 
   
   
 
